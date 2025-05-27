@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- Use bun instead npm and node
+- Do not update readmes unless I ask for it
+- Do not run the server, ask me for if necessary
+- Only do what I ask for
+- Deep think on the test before any change
+- Ask me for task confirmation aff a deep analisis
+- Consult the @web for documentation and best practicess
+- Do not use any in my typescript code

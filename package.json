@@ -1,0 +1,20 @@
+{
+  "name": "embed-components",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "bun run build.ts",
+    "build:prod": "NODE_ENV=production bun run build.ts",
+    "build:watch": "bun run watch-build.ts",
+    "dev": "bun run build && bun run server.ts",
+    "dev:watch": "bun run build && bun --watch server.ts",
+    "start": "bun run server.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
