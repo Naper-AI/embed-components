@@ -1,6 +1,7 @@
 import { AppConfig } from "../types";
 
 export abstract class AbstractComponent extends HTMLElement {
+    private _boundInitHandler = this.initHandler.bind(this);
     protected config: AppConfig | null = null;
 
     protected abstract onInit(): void;
@@ -16,7 +17,7 @@ export abstract class AbstractComponent extends HTMLElement {
     }
 
     disconnectedCallback() {
-        document.removeEventListener('naper-components-init', this.initHandler.bind(this));
+        document.removeEventListener('naper-components-init', this._boundInitHandler);
     }
 
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -31,7 +32,7 @@ export abstract class AbstractComponent extends HTMLElement {
     }
 
     protected setupEventListeners() {
-        document.addEventListener('naper-components-init', this.initHandler.bind(this));
+        document.addEventListener('naper-components-init', this._boundInitHandler);
     }
 
     private initHandler(evt: Event) {

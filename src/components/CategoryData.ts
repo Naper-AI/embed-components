@@ -1,4 +1,5 @@
 import { AbstractComponent } from "./AbstractComponent";
+import DataCache from "../helpers/DataCache";
 
 export class CategoryData extends AbstractComponent {
     protected external_id: string = '';
@@ -16,15 +17,18 @@ export class CategoryData extends AbstractComponent {
             return;
         }
 
-
         const store = this.config.store.endsWith('/') ? this.config.store : `${this.config.store}/`;
-
-        // Makes a request to the API to get the data
         const url = `${store}wp-json/wc/v3/products/categories/${this.external_id}`;
-        const response = await fetch(url);
-        const data = await response.json();
 
-        this.category = data;
+        this.category = await DataCache.fetchOrCache(
+            url,
+            async () => {
+                const response = await fetch(url);
+                return await response.json();
+            },
+            { ttlMs: 1000 * 60 * 60 } // 1 hour TTL
+        );
+
         this.render();
     }
 
