@@ -1,8 +1,9 @@
 {
-  "name": "embed-components",
-  "module": "index.ts",
+  "name": "@naper/embed-components",
+  "version": "1.0.0",
   "type": "module",
   "private": true,
+  "browser": "dist/app.js",
   "scripts": {
     "build": "bun run build.ts",
     "build:prod": "NODE_ENV=production bun run build.ts",
