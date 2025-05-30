@@ -18,16 +18,25 @@ export class CategoryData extends AbstractComponent {
         }
 
         const store = this.config.store.endsWith('/') ? this.config.store : `${this.config.store}/`;
-        const url = `${store}wp-json/wc/v3/products/categories/${this.external_id}`;
+        let query = `integration_type=${this.config.integration.type}`;
+        query += `&integration_name=${this.config.integration.name}`;
+        query += `&integration_id=${this.external_id}`;
+        query += 'limit=1';
 
-        this.category = await DataCache.fetchOrCache(
+        const url = `${store}wp-json/wc/v3/products/categories?${query}`;
+
+        const response = await DataCache.fetchOrCache(
             url,
             async () => {
                 const response = await fetch(url);
                 return await response.json();
             },
-            { ttlMs: 1000 * 60 * 60 } // 1 hour TTL
+            { ttlMs: 1000 * 60 * 5 } // 5 minutes TTL
         );
+
+        if (response.length > 0) {
+            this.category = response[0];
+        } 
 
         this.render();
     }

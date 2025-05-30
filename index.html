@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script async src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 
     <title>Embed Naper Components</title>
 
     <script async type="module">
-        import { NaperComponents } from 'https://cdn.jsdelivr.net/npm/@naper/embed-components@0';
-
+        import { NaperComponents } from 'https://unpkg.com/@naper/embed-components@1/dist/app.js';
         NaperComponents.init({
-            store: 'https://site1.naper-plugin.localhost/',
+            store: 'https://mysite.localhost/',
             integration: {
                 type: 'vtex',
-                name: 'test'
+                name: 'producao'
             }
         });
     </script>
@@ -24,13 +23,13 @@
 <body>
     <div class="flex flex-col items-center justify-center h-screen">
         <h1 class="text-4xl font-bold">
-            <category-data external-id="26" data="name"></category-data>
+            <category-data external-id="1000491" data="name"></category-data>
         </h1>
         <br />
-        <category-data external-id="26" data="description"></category-data>
+        <category-data external-id="1000491" data="description"></category-data>
         <br />
         <iconify-icon icon="mdi:home" noobserver></iconify-icon>
-        <category-data external-id="26" data="long_description"></category-data>
+        <category-data external-id="1000491" data="long_description"></category-data>
     </div>
 </body>
 </html> 
