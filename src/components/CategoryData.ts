@@ -21,7 +21,7 @@ export class CategoryData extends AbstractComponent {
         let query = `integration_type=${this.config.integration.type}`;
         query += `&integration_name=${this.config.integration.name}`;
         query += `&integration_id=${this.external_id}`;
-        query += 'limit=1';
+        query += '&limit=1';
 
         const url = `${store}wp-json/wc/v3/products/categories?${query}`;
 
