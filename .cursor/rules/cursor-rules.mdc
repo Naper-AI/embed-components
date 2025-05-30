@@ -8,6 +8,6 @@ alwaysApply: true
 - Do not run the server, ask me for if necessary
 - Only do what I ask for
 - Deep think on the test before any change
-- Ask me for task confirmation aff a deep analisis
-- Consult the @web for documentation and best practicess
-- Do not use any in my typescript code
+- Ask me for task confirmation after a deep analisys
+- Consult @web for documentation and best practices
+- Do not use any in typescript code
