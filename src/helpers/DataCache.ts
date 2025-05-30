@@ -125,7 +125,7 @@ class DataCache {
 
   // Public API: fetchOrCache
   static async fetchOrCache<T>(key: string, fetcher: () => Promise<T>, options?: CacheOptions): Promise<T> {
-    const ttlMs = options?.ttlMs ?? 1000 * 60 * 60; // Default 1 hour
+    const ttlMs = options?.ttlMs ?? 1000 * 60 * 5; // Default 5 minutes
 
     const mem = this.getMemory<T>(key);
     if (mem !== undefined) {
