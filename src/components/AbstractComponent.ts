@@ -20,7 +20,7 @@ export abstract class AbstractComponent extends HTMLElement {
         document.removeEventListener('naper-components-init', this._boundInitHandler);
     }
 
-    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    attributeChangedCallback(name: string, _: string, newValue: string) {
         const childClass = this.constructor as typeof AbstractComponent;
         if (!childClass.observedAttributes.includes(name)) {
             return;
