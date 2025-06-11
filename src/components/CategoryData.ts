@@ -17,6 +17,15 @@ export class CategoryData extends AbstractComponent {
             return;
         }
 
+        if (this.external_id.startsWith('${')) {
+            const callback = this.external_id.slice(2, -1);
+            this.external_id = eval(callback);
+        }
+
+        if (!this.external_id) {
+            return;
+        }
+
         const store = this.config.store.endsWith('/') ? this.config.store : `${this.config.store}/`;
         let query = `integration_type=${this.config.integration.type}`;
         query += `&integration_name=${this.config.integration.name}`;
