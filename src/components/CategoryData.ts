@@ -6,6 +6,8 @@ export class CategoryData extends AbstractComponent {
     protected data: string = '';
     protected category: {
         description: string;
+        long_description: string;
+        name: string;
     } | null = null;
 
     static get observedAttributes() {
@@ -45,14 +47,13 @@ export class CategoryData extends AbstractComponent {
 
         if (response.length > 0) {
             this.category = response[0];
-        } 
+        }
 
         this.render();
     }
 
     protected render() {
         if (!this.data || !this.category) {
-            this.innerHTML = '';
             return;
         }
 
