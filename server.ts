@@ -7,20 +7,6 @@ const server = serve({
     const url = new URL(req.url);
     const pathname = url.pathname;
 
-    // Serve the main HTML file for root path
-    if (pathname === "/" || pathname === "/index.html") {
-      try {
-        const htmlFile = file("./index.html");
-        return new Response(htmlFile, {
-          headers: {
-            "Content-Type": "text/html",
-          },
-        });
-      } catch (error) {
-        return new Response("index.html not found", { status: 404 });
-      }
-    }
-
     // Serve main.js from dist folder
     if (pathname === "/app.js") {
       try {
@@ -46,8 +32,16 @@ const server = serve({
       }
     }
 
-    // Default 404 response
-    return new Response("Not Found", { status: 404 });
+    try {
+      const htmlFile = file("./index.html");
+      return new Response(htmlFile, {
+        headers: {
+          "Content-Type": "text/html",
+        },
+      });
+    } catch (error) {
+      return new Response("index.html not found", { status: 404 });
+    }
   },
 });
 

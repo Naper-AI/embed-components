@@ -4,6 +4,7 @@ import DataCache from "../helpers/DataCache";
 export class CategoryData extends AbstractComponent {
     protected external_id: string = '';
     protected data: string = '';
+    protected path: string = '';
     protected category: {
         description: string;
         long_description: string;
@@ -11,11 +12,11 @@ export class CategoryData extends AbstractComponent {
     } | null = null;
 
     static get observedAttributes() {
-      return ['external-id', 'data'];
+      return ['external-id', 'data', 'path'];
     }
 
     protected async onInit() {
-        if (!this.config || !this.external_id) {
+        if (!this.config || (!this.external_id && !this.path)) {
             return;
         }
 
@@ -24,15 +25,27 @@ export class CategoryData extends AbstractComponent {
             this.external_id = eval(callback);
         }
 
-        if (!this.external_id) {
+        if (this.path.startsWith('${')) {
+            const callback = this.path.slice(2, -1);
+            this.path = eval(callback);
+        }
+
+        if (!this.external_id && !this.path) {
             return;
         }
 
         const store = this.config.store.endsWith('/') ? this.config.store : `${this.config.store}/`;
-        let query = `integration_type=${this.config.integration.type}`;
-        query += `&integration_name=${this.config.integration.name}`;
-        query += `&integration_id=${this.external_id}`;
-        query += '&limit=1';
+        let query = '';
+
+        if (this.path) {
+            query = `path=${this.path}`;
+            query += '&limit=1';
+        } else {
+            query = `integration_type=${this.config.integration.type}`;
+            query += `&integration_name=${this.config.integration.name}`;
+            query += `&integration_id=${this.external_id}`;
+            query += '&limit=1';
+        }
 
         const url = `${store}wp-json/wc/v3/products/categories?${query}`;
 

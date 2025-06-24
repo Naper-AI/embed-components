@@ -26,7 +26,13 @@
             <category-data external-id="1000491" data="name"></category-data>
         </h1>
         <br />
-        <category-data external-id="1000491" data="description"></category-data>
+
+        <!-- Using external-id -->
+        <category-data external-id="1000491" data="description">My pre-rendered description</category-data>
+
+        <!-- Using path -->
+        <category-data path="${window.location.pathname}" data="description">My pre-rendered description</category-data>
+
         <br />
         <iconify-icon icon="mdi:home" noobserver></iconify-icon>
         <category-data external-id="1000491" data="long_description"></category-data>
