@@ -10,8 +10,9 @@ export class NaperComponents {
   static init(config: AppConfig) {
     this.config = config;
     document.dispatchEvent(new CustomEvent(
-        'naper-components-init',
-        { detail: config }
+      'naper-components-init',
+      { detail: config }
     ));
+    window.naper_components_init = true;
   }
 }

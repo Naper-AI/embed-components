@@ -1,3 +1,9 @@
+declare global {
+    interface Window {
+        naper_components_init: boolean;
+    }
+}
+
 export type AppConfig = {
     store: string;
     integration: {

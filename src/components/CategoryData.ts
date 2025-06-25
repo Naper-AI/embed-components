@@ -3,6 +3,7 @@ import DataCache from "../helpers/DataCache";
 
 export class CategoryData extends AbstractComponent {
     protected external_id: string = '';
+    protected data_external_id: string = '';
     protected data: string = '';
     protected data_path: string = '';
     protected data_key: string = '';
@@ -13,10 +14,12 @@ export class CategoryData extends AbstractComponent {
     } | null = null;
 
     static get observedAttributes() {
-      return ['external-id', 'data-path', 'data', 'data-key'];
+      return ['external-id', 'data-external-id', 'data-path', 'data', 'data-key'];
     }
 
     protected async onInit() {
+        this.external_id = this.data_external_id || this.external_id;
+
         if (!this.config || (!this.external_id && !this.data_path)) {
             return;
         }
@@ -40,7 +43,6 @@ export class CategoryData extends AbstractComponent {
 
         if (this.data_path) {
             query = `path=${this.data_path}`;
-            query += '&limit=1';
         } else {
             query = `integration_type=${this.config.integration.type}`;
             query += `&integration_name=${this.config.integration.name}`;
@@ -62,8 +64,6 @@ export class CategoryData extends AbstractComponent {
         if (response.length > 0) {
             this.category = response[0];
         }
-
-        this.render();
     }
 
     protected render() {
@@ -71,7 +71,7 @@ export class CategoryData extends AbstractComponent {
             return;
         }
 
-        const key = !this.data ? this.data_key : this.data;
+        const key = this.data_key || this.data;
         this.innerHTML = this.category[key as keyof typeof this.category] || '';
     }
 }

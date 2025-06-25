@@ -49,8 +49,8 @@ Displays specific data of a product category.
 
 #### Attributes
 
-- **data-path**: Path to the category (optional, can be used instead of `external-id`)
-- **external-id**: External category ID (optional, can be used instead of `data-path`)
+- **data-path**: Path to the category (optional, can be used instead of `data-external-id`)
+- **data-external-id**: External category ID (optional, can be used instead of `data-path`)
 - **data-key**: Key of the data to display (required)
 - **data**: Type of data to display (optional, can be used instead of `data-key`)
 
@@ -66,7 +66,7 @@ Displays specific data of a product category.
 
 ```html
 <category-data 
-    external-id="1000" 
+    data-external-id="1000" 
     data-key="name">
 </category-data>
 ```
@@ -75,7 +75,7 @@ Displays specific data of a product category.
 
 ```html
 <category-data 
-    external-id="1000" 
+    data-external-id="1000" 
     data-key="description">
     <span slot="default">
         Category not found or still loading...
@@ -91,7 +91,7 @@ Displays specific data of a product category.
 </script>
 
 <category-data
-    external-id="${npGetCategoryId()}"
+    data-external-id="${npGetCategoryId()}"
     data-key="name">
 </category-data>
 ```
@@ -119,7 +119,7 @@ Displays specific data of a product category.
 
 ```html
 <category-data 
-    external-id="1000491" 
+    data-external-id="1000491" 
     data-key="long_description">
     <div slot="default">
         <p>Description not available at the moment.</p>
@@ -132,7 +132,7 @@ Displays specific data of a product category.
 To display default content when the category is not loaded or not found, use the `default` slot:
 
 ```html
-<category-data external-id="1000" data-key="description">
+<category-data data-external-id="1000" data-key="description">
     <span slot="default">
         A default value
     </span>
@@ -171,13 +171,13 @@ The library implements automatic caching with a 5-minute TTL to optimize request
     </script>
 </head>
 <body>
-    <category-data external-id="1000" data="description">
+    <category-data data-external-id="1000" data="description">
         <h1>Category XYZ</h1>
     </category-data>
     
     <main>
         <div>
-            <category-data external-id="1000" data="long_description"></category-data>
+            <category-data data-external-id="1000" data="long_description"></category-data>
         </div>
     </main>
 </body>

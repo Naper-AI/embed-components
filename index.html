@@ -11,6 +11,7 @@
 
     <script async type="module">
         import { NaperComponents } from 'https://unpkg.com/@naper/embed-components@1/dist/app.js';
+        // import { NaperComponents } from '/dist/app.js';
         NaperComponents.init({
             store: 'https://mysite.localhost/',
             integration: {
@@ -23,19 +24,19 @@
 <body>
     <div class="flex flex-col items-center justify-center h-screen">
         <h1 class="text-4xl font-bold">
-            <category-data external-id="1000491" data="name"></category-data>
+            <category-data data-external-id="1000491" data="name"></category-data>
         </h1>
         <br />
 
         <!-- Using external-id -->
-        <category-data external-id="1000491" data-key="description">My pre-rendered description</category-data>
+        <category-data data-external-id="1000491" data-key="description">My pre-rendered description</category-data>
 
         <!-- Using data-path -->
         <category-data data-path="${window.location.pathname}" data-key="description">My pre-rendered description</category-data>
 
         <br />
         <iconify-icon icon="mdi:home" noobserver></iconify-icon>
-        <category-data external-id="1000491" data="long_description"></category-data>
+        <category-data data-external-id="1000491" data="long_description"></category-data>
     </div>
 </body>
 </html> 
