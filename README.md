@@ -49,8 +49,10 @@ Displays specific data of a product category.
 
 #### Attributes
 
-- **external-id**: External category ID (required)
-- **data**: Type of data to display (required)
+- **data-path**: Path to the category (optional, can be used instead of `external-id`)
+- **external-id**: External category ID (optional, can be used instead of `data-path`)
+- **data-key**: Key of the data to display (required)
+- **data**: Type of data to display (optional, can be used instead of `data-key`)
 
 #### Available Data
 
@@ -65,7 +67,7 @@ Displays specific data of a product category.
 ```html
 <category-data 
     external-id="1000" 
-    data="name">
+    data-key="name">
 </category-data>
 ```
 
@@ -74,7 +76,7 @@ Displays specific data of a product category.
 ```html
 <category-data 
     external-id="1000" 
-    data="description">
+    data-key="description">
     <span slot="default">
         Category not found or still loading...
     </span>
@@ -90,16 +92,35 @@ Displays specific data of a product category.
 
 <category-data
     external-id="${npGetCategoryId()}"
-    data="name">
+    data-key="name">
 </category-data>
 ```
+
+### Using Path to Display Category Description
+
+```html
+<category-data data-path="/category/subcategory">
+    <span slot="default">
+        Category not found or still loading...
+    </span>
+</category-data>
+```
+
+### Using the current URL path to display category description
+
+```html
+<category-data data-path="${window.location.pathname}">
+    <span slot="default">
+        Category not found or still loading...
+    </span>
+</category-data>
 
 ### Displaying Long Description
 
 ```html
 <category-data 
     external-id="1000491" 
-    data="long_description">
+    data-key="long_description">
     <div slot="default">
         <p>Description not available at the moment.</p>
     </div>
@@ -111,7 +132,7 @@ Displays specific data of a product category.
 To display default content when the category is not loaded or not found, use the `default` slot:
 
 ```html
-<category-data external-id="1000" data="description">
+<category-data external-id="1000" data-key="description">
     <span slot="default">
         A default value
     </span>

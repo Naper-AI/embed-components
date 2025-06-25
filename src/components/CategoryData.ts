@@ -4,7 +4,7 @@ import DataCache from "../helpers/DataCache";
 export class CategoryData extends AbstractComponent {
     protected external_id: string = '';
     protected data: string = '';
-    protected path: string = '';
+    protected data_path: string = '';
     protected data_key: string = '';
     protected category: {
         description: string;
@@ -13,11 +13,11 @@ export class CategoryData extends AbstractComponent {
     } | null = null;
 
     static get observedAttributes() {
-      return ['external-id', 'path', 'data', 'data-key'];
+      return ['external-id', 'data-path', 'data', 'data-key'];
     }
 
     protected async onInit() {
-        if (!this.config || (!this.external_id && !this.path)) {
+        if (!this.config || (!this.external_id && !this.data_path)) {
             return;
         }
 
@@ -26,20 +26,20 @@ export class CategoryData extends AbstractComponent {
             this.external_id = eval(callback);
         }
 
-        if (this.path.startsWith('${')) {
-            const callback = this.path.slice(2, -1);
-            this.path = eval(callback);
+        if (this.data_path.startsWith('${')) {
+            const callback = this.data_path.slice(2, -1);
+            this.data_path = eval(callback);
         }
 
-        if (!this.external_id && !this.path) {
+        if (!this.external_id && !this.data_path) {
             return;
         }
 
         const store = this.config.store.endsWith('/') ? this.config.store : `${this.config.store}/`;
         let query = '';
 
-        if (this.path) {
-            query = `path=${this.path}`;
+        if (this.data_path) {
+            query = `path=${this.data_path}`;
             query += '&limit=1';
         } else {
             query = `integration_type=${this.config.integration.type}`;
