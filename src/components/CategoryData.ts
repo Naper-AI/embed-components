@@ -5,6 +5,7 @@ export class CategoryData extends AbstractComponent {
     protected external_id: string = '';
     protected data: string = '';
     protected path: string = '';
+    protected data_key: string = '';
     protected category: {
         description: string;
         long_description: string;
@@ -12,7 +13,7 @@ export class CategoryData extends AbstractComponent {
     } | null = null;
 
     static get observedAttributes() {
-      return ['external-id', 'data', 'path'];
+      return ['external-id', 'path', 'data', 'data-key'];
     }
 
     protected async onInit() {
@@ -66,11 +67,12 @@ export class CategoryData extends AbstractComponent {
     }
 
     protected render() {
-        if (!this.data || !this.category) {
+        if (!this.category || (!this.data && !this.data_key)) {
             return;
         }
 
-        this.innerHTML = this.category[this.data as keyof typeof this.category] || '';
+        const key = !this.data ? this.data_key : this.data;
+        this.innerHTML = this.category[key as keyof typeof this.category] || '';
     }
 }
   
